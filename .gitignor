@@ -1,0 +1,15 @@
+# Project Settings and MetaData
+.project
+.settings/
+.metadata
+build.properties
+config
+
+# Apex Log as optional
+apex-scripts/log
+
+# Illuminated Cloud (IntelliJ IDEA)
+IlluminatedCloud
+out
+.idea
+*.iml
