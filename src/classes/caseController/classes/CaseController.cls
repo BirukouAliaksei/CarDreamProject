@@ -13,8 +13,9 @@ global with sharing class CaseController {
             Case aCase = casesList.get(i);
             if (aCase == null) continue;
             for (Integer j = 0; j < casesList.size(); j++) {
-                if (aCase.CaseNumber == aCase.CaseNumber && aCase.Reason == aCase.Reason
-                        && aCase.Subject == aCase.Subject ) {
+                if (aCase.CaseNumber == casesList.get(j).CaseNumber
+                        && aCase.Reason == casesList.get(j).Reason
+                        && aCase.Subject == casesList.get(j).Subject) {
                     duplicateCases.add(aCase);
                 }
             }
