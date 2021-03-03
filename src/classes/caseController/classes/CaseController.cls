@@ -6,7 +6,8 @@ global with sharing class CaseController {
     @AuraEnabled
     global static List<Case> getCases() {
 
-        List<Case> casesList = [SELECT Subject, CaseNumber, Origin, SuppliedEmail__c, Status, Reason, OwnerId FROM Case LIMIT 10];
+        List<Case> casesList = [SELECT Subject, CaseNumber, Origin, SuppliedEmail__c, Status, Reason, OwnerId
+        FROM Case WHERE Status!='Closed (Resolved)' AND Status != 'Closed'];
         List<Case> duplicateCases = new List<Case>();
 
         for (Integer i = 0; i < casesList.size(); i++) {
