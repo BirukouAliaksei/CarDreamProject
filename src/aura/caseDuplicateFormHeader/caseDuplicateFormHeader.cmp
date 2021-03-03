@@ -1,0 +1,17 @@
+<!--
+ - Created by Bruss on 3/2/2021.
+ -->
+
+<aura:component description="caseDuplicateFormHeader">
+    <lightning:layout class="slds-page-header slds-page-header_object-home">
+        <lightning:layoutItem>
+            <lightning:icon iconName="action:user_activation" alternativeText="Case Duplicates"/>
+        </lightning:layoutItem>
+        <lightning:layoutItem padding="horizontal-small">
+            <div class="page-section page-header">
+                <h1 class="slds-text-heading_label">Case</h1>
+                <h2 class="slds-text-heading_medium">Case Duplicate</h2>
+            </div>
+        </lightning:layoutItem>
+    </lightning:layout>
+</aura:component>

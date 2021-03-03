@@ -1,0 +1,63 @@
+<aura:component description="caseDuplicateForm" controller="CaseController">
+    <aura:attribute name="Cases" type="Case[]"/>
+    <!--    Page Header-->
+    <c:caseDuplicateFormHeader/>
+    <aura:handler name="init" action="{!c.getCasesList}" value="{!this}"/>
+
+    <section class="slds-card__body">
+        <div id="list" class="row">
+            <table class="slds-table slds-table_cell-buffer slds-table_bordered">
+                <thead>
+                <tr class="slds-line-height_reset">
+                    <th class="slds-text-title_caps" scope="col">
+                        <div class="slds-truncate" title="Case Number">Case Number</div>
+                    </th>
+                    <th class="slds-text-title_caps" scope="col">
+                        <div class="slds-truncate" title="Case Origin">Case Origin</div>
+                    </th>
+                    <th class="slds-text-title_caps" scope="col">
+                        <div class="slds-truncate" title="Supplied Email">Supplied Email</div>
+                    </th>
+                    <th class="slds-text-title_caps" scope="col">
+                        <div class="slds-truncate" title="Status">Status</div>
+                    </th>
+                    <th class="slds-text-title_caps" scope="col">
+                        <div class="slds-truncate" title="Reason">Reason</div>
+                    </th>
+                    <th class="slds-text-title_caps" scope="col">
+                        <div class="slds-truncate" title="Case Owner">Owner</div>
+                    </th>
+                </tr>
+                </thead>
+
+                <tbody>
+                <aura:iteration items="{!v.Cases}" var="case">
+                    <tr class="slds-hint-parent">
+                        <td data-label="Case Number">
+                            <div class="slds-truncate" title="Case Number">{!case.CaseNumber}</div>
+                        </td>
+                        <td data-label="Case Origin">
+                            <div class="slds-truncate" title="Case Origin">{!case.Origin}</div>
+                        </td>
+                        <td data-label="Supplied Email">
+                            <div class="slds-truncate" title="Supplied Email">{!case.SuppliedEmail__c}</div>
+                        </td>
+                        <td data-label="Status">
+                            <div class="slds-truncate" title="Status">{!case.Status}</div>
+                        </td>
+                        <td data-label="Reason">
+                            <div class="slds-truncate" title="Reason">{!case.Reason}</div>
+                        </td>
+                        <td data-label="Reason">
+                            <div class="slds-truncate" title="Case Owner">{!case.OwnerId}</div>
+                        </td>
+                        <lightning:button onclick="{!c.getCasesList}" label="Merge"/>
+                    </tr>
+                </aura:iteration>
+                </tbody>
+            </table>
+        </div>
+    </section>
+<!--    <lightning:button onclick="{!c.getCasesList}" label="Update"/>-->
+
+</aura:component>
