@@ -1,11 +1,12 @@
 <template>
         <div class="container">
             <a onclick={tileClick}>
-                <img class="product-img" src="https://s3-us-west-1.amazonaws.com/sfdc-demo/ebikes/electrax4.jpg"></img>
+                <img class="product-img" src={sourceUrl}></img>
                 <div class="title">{product.Name}</div>
                 <div class="title">{product.ProductCode}</div>
                 <div class="title">{product.Price__c}</div>
                 <div class="year">{product.Year__c}</div>
+                <!-- https://s3-us-west-1.amazonaws.com/sfdc-demo/ebikes/electrax4.jpg -->
             </a>
         </div>
 </template>
