@@ -1,8 +1,9 @@
-<aura:component description="caseDuplicateForm" controller="CaseController">
-    <aura:attribute name="Cases" type="Case[]"/>
-    <!--    Page Header-->
+<aura:component description="CaseDuplicateForm" controller="CaseController">
+    <aura:attribute name="cases" type="Case[]"/>
     <c:caseDuplicateFormHeader/>
     <aura:handler name="init" action="{!c.getCasesList}" value="{!this}"/>
+
+    <aura:registerEvent name="openModal" type="c:popUpEvent"/>
 
     <section class="slds-card__body">
         <div id="list" class="row">
@@ -31,8 +32,8 @@
                 </thead>
 
                 <tbody>
-                <aura:iteration items="{!v.Cases}" var="case">
-                    <tr class="slds-hint-parent">
+                <aura:iteration items="{!v.cases}" var="case">
+                    <tr class="slds-hint-parent" title="">
                         <td data-label="Case Number">
                             <div class="slds-truncate" title="Case Number">{!case.CaseNumber}</div>
                         </td>
@@ -51,13 +52,14 @@
                         <td data-label="Reason">
                             <div class="slds-truncate" title="Case Owner">{!case.OwnerId}</div>
                         </td>
-                        <lightning:button onclick="{!c.getCasesList}" label="Merge"/>
+                        <lightning:button aura:id="mergeTableId" title="Merge" onclick="{!c.mergeCasesList}"
+                                          label="Merge"/>
                     </tr>
                 </aura:iteration>
                 </tbody>
             </table>
         </div>
+
     </section>
-<!--    <lightning:button onclick="{!c.getCasesList}" label="Update"/>-->
 
 </aura:component>

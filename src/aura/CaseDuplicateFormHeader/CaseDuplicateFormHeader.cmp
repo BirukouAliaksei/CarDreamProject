@@ -9,7 +9,7 @@
         </lightning:layoutItem>
         <lightning:layoutItem padding="horizontal-small">
             <div class="page-section page-header">
-                <h1 class="slds-text-heading_label">Case</h1>
+                <h1 class="slds-text-heading_label ">Case</h1>
                 <h2 class="slds-text-heading_medium">Case Duplicate</h2>
             </div>
         </lightning:layoutItem>

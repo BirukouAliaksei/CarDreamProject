@@ -1,0 +1,7 @@
+<!--
+ - Created by Bruss on 3/5/2021.
+ -->
+
+<aura:event type="COMPONENT" description="popUpEvent">
+    <aura:attribute name="openPopup" type="boolean"/>
+</aura:event>
