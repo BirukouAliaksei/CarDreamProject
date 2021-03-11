@@ -8,11 +8,11 @@
         <target>lightning__HomePage</target>
         <target>lightningCommunity__Page</target>
     </targets>
-    <targetConfigs>
+    <!-- <targetConfigs>
         <targetConfig targets="lightning__RecordPage">
             <objects>
                 <object>Product2</object>
             </objects>
         </targetConfig>
-    </targetConfigs>
+    </targetConfigs> -->
 </LightningComponentBundle>
