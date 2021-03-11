@@ -1,0 +1,16 @@
+<template>
+    <lightning-input type="search" onchange={handleKeyChange} class="slds-m-bottom_small" label="Search" value={searchKey}></lightning-input>
+        <div class="container" title="List">
+            <template if:true={products.data} >
+            <template for:each={products.data} for:item="product">
+                <!-- <p key={product.id}>{product.Name}</p>
+                <p key={product.id}>{product.ProductCode}</p> -->
+                <c-tile 
+                    key={product.Id} 
+                    product={product} 
+                    ontileclick={handleTileClick}>
+                </c-tile>
+            </template>
+        </template>
+        </div>
+</template>

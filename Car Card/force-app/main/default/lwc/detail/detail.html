@@ -1,0 +1,32 @@
+<template>
+    <template if:true={product}>
+        <!-- <div class="cantainer">
+            <lightning-input type="search" onchange={handleKeyChange} class="slds-m-bottom_small" label="Search" value={searchKey}></lightning-input>
+            <template if:true={products.data} >
+                <template for:each={products.data} for:item="product">
+                    <div class="container" key={product.id}>
+                            <p key={product.id}>{product.Name}</p>
+                            <p>{product.ProductCode}</p>
+                            <div><img src='https://drive.google.com/file/d/1ZxLi6nZTIqNovv3gvJ21o5Hc9u0--SbA/view?usp=sharing'/></div>
+                    </div>
+                </template>              
+            </template>
+        </div> -->
+       
+        <div class="container">
+            <div>{product.Name}</div>
+            <div class="name">{product.Name}</div>
+            <div class="code">{product.ProductCode}</div>
+            <!-- <p>
+                <lightning-badge label={product.fields.Material__c.value}></lightning-badge>
+                <lightning-badge label={product.fields.Level__c.value}></lightning-badge>
+            </p>
+            <p>
+                <lightning-badge label={product.fields.Category__c.value}></lightning-badge>
+            </p> -->
+        </div>
+    </template>
+    <template if:false={product}>
+        <div>Select a Car</div>
+    </template>
+</template>

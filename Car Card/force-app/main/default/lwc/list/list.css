@@ -1,0 +1,12 @@
+.container {
+    display: flex;
+    flex-direction: row-reverse;
+    flex-wrap: wrap;
+}
+
+.slds-m-bottom_small {
+    border: 20px;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+}
