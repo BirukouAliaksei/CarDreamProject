@@ -1,0 +1,6 @@
+<!--
+ - Created by Bruss on 3/12/2021.
+ -->
+
+<aura:event type="COMPONENT" description="MergeEvent">
+</aura:event>
