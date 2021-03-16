@@ -1,18 +1,18 @@
-<!--
- - Created by Bruss on 3/3/2021.
- -->
-
-<aura:component description="ModalPopup" access="global" controller="CaseController">
+<aura:component description="ModalPopup" controller="CaseController"
+                implements="flexipage:availableForAllPageTypes,flexipage:availableForRecordHome,force:hasRecordId,force:lightningQuickAction"
+                access="global">
 
     <aura:attribute name="isModalOpen" type="boolean" default="false"/>
+    <aura:attribute name="clickedMergeButtonId" type="String" />
 
-    <aura:handler name="openModal" event="c:popUpEvent" action="{!c.openModel}"/>
-    <c:caseDuplicateForm />
+    <aura:handler name="openModal" event="c:PopUpEvent" action="{!c.openModel}"/>
+    <c:caseDuplicateForm recordId="{!v.recordId}"/>
 
     <div class="slds-m-around_xx-large">
         <aura:if isTrue="{!v.isModalOpen}">
 
-            <section role="dialog" tabindex="-1" aria-labelledby="modal-heading-01" aria-modal="true" aria-describedby="modal-content-id-1" class="slds-modal slds-fade-in-open">
+            <section role="dialog" tabindex="-1" aria-labelledby="modal-heading-01" aria-modal="true"
+                     aria-describedby="modal-content-id-1" class="slds-modal slds-fade-in-open">
                 <div class="slds-modal__container">
                     <header class="slds-modal__header">
                         <lightning:buttonIcon iconName="utility:close"
@@ -26,8 +26,14 @@
                         <p><b>The Case will be closed
                             </b>
                         </p>
+
                     </div>
                     <footer class="slds-modal__footer">
+                        <div class="slds-modal__content slds-p-around_medium" id="modal-content-id-1">
+                            <p><b>Notify the employee about the closure</b></p>
+                            <lightning:input type="checkbox" label="Close"
+                                             checked="{!c.bellNotification}"/>
+                        </div>
                         <lightning:button variant="neutral"
                                           label="Cancel"
                                           title="Cancel"

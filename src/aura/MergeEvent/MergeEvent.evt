@@ -3,4 +3,5 @@
  -->
 
 <aura:event type="COMPONENT" description="MergeEvent">
+    <aura:attribute name="mergeCases" type="Case"/>
 </aura:event>

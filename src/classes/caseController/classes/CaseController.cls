@@ -3,43 +3,51 @@
  */
 
 global with sharing class CaseController {
+
     @AuraEnabled
-    global static List<Case> getCases() {
+    global static List<Case> getCases(Id caseId) {
+        List<Case> duplicateCases = new List<Case>();
+
         List<Case> casesList = [
                 SELECT Id, Subject, CaseNumber, Origin, SuppliedEmail__c, Status, Reason, OwnerId
                 FROM Case
                 WHERE Status != 'Closed (Resolved)' AND Status != 'Closed'
         ];
-        List<Case> duplicateCases = new List<Case>();
 
-        for (Integer i = 0; i < casesList.size(); i++) {
-            Case aCase = casesList.get(i);
-            if (aCase == null) continue;
-            for (Integer j = 0; j < casesList.size(); j++) {
-                if (aCase.CaseNumber == casesList.get(j).CaseNumber
-                        && aCase.Reason == casesList.get(j).Reason
-                        && aCase.Subject == casesList.get(j).Subject) {
-                    duplicateCases.add(aCase);
+        Case aCase = [
+                SELECT Id, Subject, CaseNumber, Origin, SuppliedEmail__c, Status, Reason, OwnerId
+                FROM Case
+                WHERE Id = :caseId
+        ];
+
+        if (aCase != null) {
+            for (Integer i = 0; i < casesList.size(); i++) {
+                if (aCase.Reason == casesList.get(i).Reason
+                        && aCase.Subject == casesList.get(i).Subject
+                        && aCase.SuppliedEmail__c == casesList.get(i).SuppliedEmail__c
+                        && aCase != casesList.get(i)) {
+                    duplicateCases.add(casesList.get(i));
                 }
             }
         }
+        CustomNotificationFromApex.sentNotification(caseId, aCase.CaseNumber);
         return duplicateCases;
     }
 
     @AuraEnabled
-    global static List<Case> mergeNewCases(Id caseId) {
+    global static void mergeNewCases(Id caseId) {
         for (Case c : getCaseById(caseId)) {
             if (c.Status == 'New') {
                 Database.merge(c, getCaseById(caseId));
             }
-        }return getCaseById(caseId);
+        }
     }
 
     @AuraEnabled
     global static List<Case> getCaseById(Id caseId) {
         List<Case> duplicateCases = new List<Case>();
         List<Case> casesList = [
-                SELECT Id, Subject, CaseNumber, Origin, SuppliedEmail__c, Status, Reason, OwnerId
+                SELECT Subject, CaseNumber, Origin, SuppliedEmail__c, Status, Reason, OwnerId
                 FROM Case
                 WHERE Status != 'Closed (Resolved)' AND Status != 'Closed'
         ];
@@ -51,12 +59,16 @@ global with sharing class CaseController {
         ];
 
         for (Integer i = 0; i < casesList.size(); i++) {
-            if (clickedCase.CaseNumber == casesList.get(i).CaseNumber
+            if (clickedCase.SuppliedEmail == casesList.get(i).SuppliedEmail
                     && clickedCase.Reason == casesList.get(i).Reason
                     && clickedCase.Subject == casesList.get(i).Subject) {
+                duplicateCases.add(casesList.get(i));
+            } else {
                 duplicateCases.add(clickedCase);
             }
         }
         return duplicateCases;
     }
+
+
 }
