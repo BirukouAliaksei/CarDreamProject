@@ -1,6 +1,12 @@
-<!--
- - Created by Bruss on 3/16/2021.
- -->
 
 <aura:component description="CarListForm">
+
+    <aura:attribute name="productNew" type="Product2" />
+
+    <img src="{!$Resource.CarDreamLogo}" alt=""/>
+    <p>Name: {!v.productNew.Name}</p>
+    <p>Product Code: <lightning:formattedNumber value="{!v.productNew.ProductCode}"/> </p>
+    <p>Price: <lightning:formattedNumber value="{!v.productNew.Price__c}"/> </p>
+    <p>Year: <lightning:formattedNumber value="{!v.productNew.Year__c}"/> </p>
+
 </aura:component>

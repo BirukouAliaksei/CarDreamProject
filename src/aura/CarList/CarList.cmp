@@ -1,6 +1,40 @@
-<!--
- - Created by Bruss on 3/16/2021.
- -->
+<aura:component description="CarList" implements="forceCommunity:availableForAllPageTypes"
+                access="global" controller="ProductController">
+    <aura:attribute type="Product2[]" name="products"/>
+    <aura:attribute name="productNew" type="Product2" default="{'sobject':'Product2','Name':'Car'}"/>
+    <aura:attribute name="key" type="String"/>
+    <aura:handler name="init" value="{!this}" action="{!c.doInit}"/>
 
-<aura:component description="CarList">
+    <lightning:input type="text" name="searchKey" label="Enter" aura:id="searchKey" onchange="{!c.searchKeyChange}"
+                     placeholder="Search"/>
+
+
+    <div class="slds-tabs_card slds-text-align_center slds-show_inline">
+        <aura:iteration items="{!v.products}" var="prod">
+            <lightning:card class="slds-size_medium">
+                <p class="slds-p-horizontal_small" >
+                    <img src="{!$Resource.CarDreamLogo}" alt=""/>
+                </p>
+                <p class="slds-p-horizontal_small" >
+                    Car: {!prod.Name}
+                </p>
+                <p class="slds-p-horizontal_small" >
+                    Product Code: {!prod.ProductCode}
+                </p>
+                <p class="slds-p-horizontal_small">
+                    Price: {!prod.Price__c}
+                </p>
+                <p class="slds-p-horizontal_small">
+                    Year: {!prod.Year__c}
+                </p>
+                <lightning:button aura:id="{!prod.Id}" name="{!prod.Id}" type="button" label="Show Car" onclick="{!c.showCar}"/>
+            </lightning:card>
+        </aura:iteration>
+    </div>
+
+    <lightning:card class="slds-card">
+       <c:CarListForm productNew="{!v.productNew}"/>
+    </lightning:card>
+
+
 </aura:component>
