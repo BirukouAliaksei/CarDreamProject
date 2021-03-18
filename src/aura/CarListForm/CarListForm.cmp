@@ -8,5 +8,6 @@
     <p>Product Code: <lightning:formattedNumber value="{!v.productNew.ProductCode}"/> </p>
     <p>Price: <lightning:formattedNumber value="{!v.productNew.Price__c}"/> </p>
     <p>Year: <lightning:formattedNumber value="{!v.productNew.Year__c}"/> </p>
+    <p>Description: <lightning:formattedNumber value="{!v.productNew.Description}"/> </p>
 
 </aura:component>
