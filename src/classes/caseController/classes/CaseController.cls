@@ -40,44 +40,44 @@ global with sharing class CaseController {
                 WHERE Id = :caseId
         ];
 
+        aCase.Language__c = 'EN';
+
         Case clickedCase = [
                 SELECT Subject, CaseNumber, Origin, SuppliedEmail__c, Status, Reason, OwnerId, Description__c
                 FROM Case
                 WHERE Id = :caseToMergeId
         ];
 
-//        if (aCase != null && clickedCase != null) {
-//            if (aCase.Description__c != null) {
-//                aCase.Description__c = '“----//----”' + clickedCase.Description__c;
-//            }
-//
-//            if (clickedCase.Priority == 'High' && aCase.Priority != 'High') {
-//                aCase.Priority = clickedCase.Priority;
-//            }if (clickedCase.Priority == 'Medium' && aCase.Priority == 'Low') {
-//                aCase.Priority = clickedCase.Priority;
-//            }
-//
-//            if ((clickedCase.AccountId != null && clickedCase.Lead__c != null)
-//                    && (aCase.AccountId == null && aCase.Lead__c == null)) {
-//                aCase.AccountId = clickedCase.AccountId;
-//                aCase.Lead__c = clickedCase.Lead__c;
-//            }
-//
-//            if (aCase.Country__c == null && aCase.SuppliedEmail__c == null) {
-//                aCase.Country__c = clickedCase.Country__c;
-//                aCase.SuppliedEmail__c = clickedCase.SuppliedEmail__c;
-//            }
-//
-//            update aCase;
-//
-//
-//            System.debug(aCase);
-//            System.debug(clickedCase);
-//        }
-        delete clickedCase;
+        if (aCase != null && clickedCase != null) {
+            if (aCase.Description__c != null) {
+                aCase.Description__c = '“----//----”' + clickedCase.Description__c;
+            }
 
-//        return aCase;
+            if (clickedCase.Priority == 'High' && aCase.Priority != 'High') {
+                aCase.Priority = clickedCase.Priority;
+            }if (clickedCase.Priority == 'Medium' && aCase.Priority == 'Low') {
+                aCase.Priority = clickedCase.Priority;
+            }
+
+            if ((clickedCase.AccountId != null && clickedCase.Lead__c != null)
+                    && (aCase.AccountId == null && aCase.Lead__c == null)) {
+                aCase.AccountId = clickedCase.AccountId;
+                aCase.Lead__c = clickedCase.Lead__c;
+            }
+
+            if (aCase.Country__c == null && aCase.SuppliedEmail__c == null) {
+                if (clickedCase.Country__c != null && clickedCase.Country__c != null) {
+                    aCase.Country__c = clickedCase.Country__c;
+                    aCase.SuppliedEmail__c = clickedCase.SuppliedEmail__c;
+                }
+            }
+
+            upsert aCase;
+            System.debug(aCase);
+            System.debug(clickedCase);
+        }
+        Database.merge(aCase, clickedCase);
     }
-    
+
 
 }

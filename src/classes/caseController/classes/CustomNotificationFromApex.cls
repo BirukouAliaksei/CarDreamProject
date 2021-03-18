@@ -4,6 +4,7 @@
 
 global with sharing class CustomNotificationFromApex {
 
+    @AuraEnabled
     global static void sentNotification(String targetId, String objectNumber) {
 
         CustomNotificationType notificationType = [
@@ -20,7 +21,7 @@ global with sharing class CustomNotificationFromApex {
         try {
             notification.send(new Set<String> {UserInfo.getUserId()});
         } catch (Exception e) {
-            System.debug('Problem seication: ' + e.getMessage());
+            System.debug('Problem sending notification: ' + e.getMessage());
         }
 
     }

@@ -1,12 +1,10 @@
 <aura:component description="CaseDuplicateForm" controller="CaseController"
                 implements="flexipage:availableForRecordHome" access="global">
     <aura:attribute name="cases" type="Case[]"/>
-    <aura:attribute name="caseRecord" type="Case" />
+    <aura:attribute name="caseRecord" type="Case"/>
     <c:caseDuplicateFormHeader/>
     <aura:attribute name="recordId" type="String" access="global"/>
     <aura:attribute name="childId" type="String" access="global"/>
-
-<!--    <aura:handler name="mergeCases" event="c:MergeEvent" action="{!c.mergeCasesList}"/>-->
     <aura:handler name="init" action="{!c.getCasesList}" value="{!this}"/>
     <aura:registerEvent name="openModal" type="c:PopUpEvent"/>
 
@@ -37,7 +35,7 @@
                 </thead>
 
                 <tbody>
-                <aura:iteration items="{!v.cases}" var="case" >
+                <aura:iteration items="{!v.cases}" var="case">
                     <tr class="slds-hint-parent" title="">
                         <td data-label="Case Number">
                             <div class="slds-truncate" title="Case Number">{!case.CaseNumber}</div>
@@ -57,7 +55,8 @@
                         <td data-label="Reason">
                             <div class="slds-truncate" title="Case Owner">{!case.OwnerId}</div>
                         </td>
-                        <lightning:button aura:id="{!case.Id}" name="{!case.Id}" title="Merge" onclick="{!c.mergeCasesList}"
+                        <lightning:button aura:id="{!case.Id}" name="{!case.Id}" title="Merge"
+                                          onclick="{!c.mergeCasesList}"
                                           label="Merge"/>
                     </tr>
                 </aura:iteration>

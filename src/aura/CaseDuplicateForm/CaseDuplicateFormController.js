@@ -43,11 +43,14 @@
             });
             $A.enqueueAction(action);
 
-            // let openModal = component.getEvent("openModal");
-            // openModal.setParams({"openPopup": true});
-            // let button = event.getSource().getLocalId();
-            // console.log(button + " button");
-            // openModal.fire();
+            if (action.getState() === false) {
+                let openModal = component.getEvent("openModal");
+                openModal.setParams({"openPopup": true});
+                let button = event.getSource().getLocalId();
+                console.log(button + " button");
+                openModal.fire();
+            }
+
         },
     }
 
