@@ -57,7 +57,7 @@
                         <td data-label="Reason">
                             <div class="slds-truncate" title="Case Owner">{!case.OwnerId}</div>
                         </td>
-                        <lightning:button aura:id="MergeButton" title="Merge" onclick="{!c.mergeCasesList}"
+                        <lightning:button aura:id="{!case.Id}" name="{!case.Id}" title="Merge" onclick="{!c.mergeCasesList}"
                                           label="Merge"/>
                     </tr>
                 </aura:iteration>

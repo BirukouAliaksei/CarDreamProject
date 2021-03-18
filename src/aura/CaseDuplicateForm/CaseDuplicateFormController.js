@@ -24,14 +24,30 @@
         },
 
         mergeCasesList: function (component, event) {
+            let recordId = component.get("v.recordId");
+            let clickedCase = event.getSource().get("v.name");
+            console.log("Show clicked case: " + JSON.stringify(clickedCase));
 
-            let openModal = component.getEvent("openModal");
-            openModal.setParams({"openPopup": true});
-            let button = event.getSource().getLocalId();
-            console.log(button + " button");
+            let action = component.get("c.mergeNewCases");
+            console.log(action);
+            action.setParams({caseId:recordId,caseToMergeId:clickedCase});
 
-            console.info();
-            openModal.fire();
+            action.setCallback(this, function (response) {
+                let state = response.getState();
+                if (state === "SUCCESS") {
+                    console.log(response.getReturnValue());
+                    component.set("v.caseRecord", response.getReturnValue());
+                } else {
+                    console.log("Failed with state: " + state);
+                }
+            });
+            $A.enqueueAction(action);
+
+            // let openModal = component.getEvent("openModal");
+            // openModal.setParams({"openPopup": true});
+            // let button = event.getSource().getLocalId();
+            // console.log(button + " button");
+            // openModal.fire();
         },
     }
 
