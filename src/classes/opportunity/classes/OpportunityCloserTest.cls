@@ -21,4 +21,14 @@ public with sharing class OpportunityCloserTest {
         System.assertEquals(200, [SELECT COUNT() FROM Opportunity WHERE StageName = 'Closed Lost']);
     }
 
+    @IsTest
+    static void testFailed() {
+        Test.startTest();
+        OpportunityCloser opportunityCloser = new OpportunityCloser();
+        Id batchId = Database.executeBatch(opportunityCloser);
+        Test.stopTest();
+
+        System.assertNotEquals(199, [SELECT COUNT() FROM Opportunity WHERE StageName = 'Closed Lost']);
+
+    }
 }

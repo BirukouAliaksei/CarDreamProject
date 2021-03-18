@@ -12,14 +12,14 @@ public with sharing class OpportunityCloser implements Database.Batchable<sObjec
                 o.CloseDate = Date.today();
             }
             closeOpportunities.add(o);
-            recordsProcessed = +1;
+            recordsProcessed += 1;
         }
         update closeOpportunities;
     }
 
     public Database.QueryLocator start(Database.BatchableContext bc) {
         return Database.getQueryLocator('Select id, CloseDate, StageName from Opportunity\n' +
-                'WHERE CloseDate = THIS_MONTH AND (StageName = \'Closed Won\' OR StageName = \'Closed Lost\')');
+                'WHERE CloseDate = THIS_MONTH AND (StageName != \'Closed Won\' AND StageName != \'Closed Lost\')');
     }
 
     public void finish(Database.BatchableContext param1) {
