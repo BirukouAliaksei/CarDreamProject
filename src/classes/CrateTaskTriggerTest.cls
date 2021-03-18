@@ -2,7 +2,7 @@
  * Created by Bruss on 3/11/2021.
  */
 @IsTest
-public with sharing class CrateTaskTriggerTest {
+public with sharing class CrateTaskTriggerTest{
     @IsTest static void TestCreateTaskWithOneProduct2(){
 
         Id recordTypeId = Schema.SObjectType.Task.getRecordTypeInfosByName()
@@ -16,9 +16,9 @@ public with sharing class CrateTaskTriggerTest {
         product2.IsActive = false;
         update product2;
 
-        Test.startTest();
         insert task;
-        Test.stopTest();
+
+        System.assertEquals(1, task.size());
     }
 
 }
